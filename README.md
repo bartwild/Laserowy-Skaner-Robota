@@ -12,4 +12,4 @@ image_height = 240
 rotation_angle = 10
 total_angle = 180
 
-zaś pliki wyjsiowe to plik tekstowy i obrazek.
+zaś pliki wyjściowe to plik tekstowy i obrazek o wskazanych przez użytkownika nazwach.
