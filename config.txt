@@ -1,0 +1,5 @@
+[DEFAULT]
+image_width = 320
+image_height = 240
+rotation_angle = 10
+total_angle = 180
