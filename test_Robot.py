@@ -70,3 +70,17 @@ def test_image_path_not_image():
     robotio = RobotIO(handle, "wyniki.txt", "symulacja.png", config)
     with pytest.raises(UnidentifiedImageError):
         Robot("parametry.txt", config, robotio)
+
+
+def test_wrong_config():
+    handle = StringIO(
+        "x = 135\n"
+        + "y = 90\n"
+        + "α = 90\n"
+    )
+    config = {"image_width": "320",
+              "image_height": "240",
+              "rotation_angle": "10"}
+    robotio = RobotIO(handle, "wyniki.txt", "symulacja.png", config)
+    with pytest.raises(KeyError):
+        Robot("otoczenie.png", config, robotio)

@@ -69,6 +69,9 @@ class Robot():
         return im
 
     def black_pixels(self):
+        """
+        Returns a list of black pixels in image.
+        """
         black_pixels_list = []
         for x in range(self._width):
             for y in range(self._height):
@@ -78,14 +81,14 @@ class Robot():
 
     def rgb_of_pixel(self, x, y):
         """
-        Returns color of pixel in RGB format
+        Returns color of pixel in RGB format.
         """
         RGB = self._im.getpixel((x, y))
         return RGB
 
     def color_pixels(self, pixel_list):
         """
-        Colors the pixels in RGB format - Red color
+        Colors the pixels in RGB format - Red color.
         """
         for pixels in pixel_list:
             self._im.putpixel((pixels), (255, 0, 0))

@@ -2,10 +2,6 @@ class WrongAmountOfDataError(Exception):
     pass
 
 
-class WrongImageSizeError(Exception):
-    pass
-
-
 class WrongCoordinatesError(Exception):
     pass
 

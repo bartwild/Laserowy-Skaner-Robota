@@ -18,10 +18,10 @@ def test_open_file_assign_variables():
               "rotation_angle": "10",
               "total_angle": "180"}
     robotio = RobotIO(handle, "wyniki.txt", "symulacja.png", config)
-    parametry = robotio.text_into_numbers()
-    assert parametry["x"] == 135
-    assert parametry["y"] == 90
-    assert parametry["alpha"] == 90
+    variables = robotio.text_into_numbers()
+    assert variables["x"] == 135
+    assert variables["y"] == 90
+    assert variables["alpha"] == 90
 
 
 def test_wrong_amount_of_data_given():
@@ -71,3 +71,16 @@ def test_save_to_file():
     assert file.readline() == "57\n"
     os.remove("test_wyniki.txt")
     os.remove("test_symulacja.png")
+
+
+def test_not_enough_data_config():
+    handle = StringIO(
+        "x = 135\n"
+        + "y = 90\n"
+        + "α = 90\n"
+    )
+    config = {"image_width": "320",
+              "rotation_angle": "10",
+              "total_angle": "180"}
+    with pytest.raises(KeyError):
+        RobotIO(handle, "wyniki.txt", "symulacja.png", config)
