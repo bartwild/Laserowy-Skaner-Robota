@@ -71,16 +71,3 @@ def test_save_to_file():
     assert file.readline() == "57\n"
     os.remove("test_wyniki.txt")
     os.remove("test_symulacja.png")
-
-
-def test_not_enough_data_config():
-    handle = StringIO(
-        "x = 135\n"
-        + "y = 90\n"
-        + "α = 90\n"
-    )
-    config = {"image_width": "320",
-              "rotation_angle": "10",
-              "total_angle": "180"}
-    with pytest.raises(KeyError):
-        RobotIO(handle, "wyniki.txt", "symulacja.png", config)

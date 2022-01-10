@@ -1,4 +1,4 @@
-from Robot import Robot
+from Robot import Robot, WrongImageSizeError
 from RobotIO import RobotIO
 import pytest
 from io import StringIO
@@ -72,7 +72,7 @@ def test_image_path_not_image():
         Robot("parametry.txt", config, robotio)
 
 
-def test_wrong_config():
+def test_wrong_image_size():
     handle = StringIO(
         "x = 135\n"
         + "y = 90\n"
@@ -80,7 +80,8 @@ def test_wrong_config():
     )
     config = {"image_width": "320",
               "image_height": "240",
-              "rotation_angle": "10"}
+              "rotation_angle": "10",
+              "total_angle": "180"}
     robotio = RobotIO(handle, "wyniki.txt", "symulacja.png", config)
-    with pytest.raises(KeyError):
-        Robot("otoczenie.png", config, robotio)
+    with pytest.raises(WrongImageSizeError):
+        Robot("kreski.png", config, robotio)

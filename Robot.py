@@ -12,6 +12,10 @@ class WrongImageSizeError(Exception):
     pass
 
 
+class WrongConfigError(Exception):
+    pass
+
+
 class Robot():
     """
     Class Robot. Contains attributes:
@@ -157,10 +161,13 @@ def main(arguments):
     args = parser.parse_args(arguments[1:])
     config_parser = configparser.ConfigParser()
     config_parser.read(args.config)
-    config = {"image_width": config_parser["DEFAULT"]["image_width"],
-              "image_height": config_parser["DEFAULT"]["image_height"],
-              "rotation_angle": config_parser["DEFAULT"]["rotation_angle"],
-              "total_angle": config_parser["DEFAULT"]["total_angle"]}
+    try:
+        config = {"image_width": config_parser["DEFAULT"]["image_width"],
+                  "image_height": config_parser["DEFAULT"]["image_height"],
+                  "rotation_angle": config_parser["DEFAULT"]["rotation_angle"],
+                  "total_angle": config_parser["DEFAULT"]["total_angle"]}
+    except KeyError:
+        raise WrongConfigError()
     with open(args.text_path) as text_file:
         robotio = RobotIO(text_file, args.text_res_path,
                           args.image_res_path, config)
